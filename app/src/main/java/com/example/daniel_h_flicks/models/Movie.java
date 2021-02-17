@@ -16,6 +16,7 @@ public class Movie { // making a class Movie that so we can put the data from th
     String overview;
     String backdropPath;
     double rating;
+    int movieId;
 
 
     public String getPosterPath() { // get methods so we can get info from movie objects we make in MainActivity.java
@@ -34,6 +35,10 @@ public class Movie { // making a class Movie that so we can put the data from th
         return rating;
     }
 
+    public int getMovieId() {
+        return movieId;
+    }
+
     public String getBackdropPath() {
         return String.format("https://image.tmdb.org/t/p/w780/%s", backdropPath); //for landscape mode
     }
@@ -44,6 +49,7 @@ public class Movie { // making a class Movie that so we can put the data from th
         overview = jsonObject.getString("overview");
         backdropPath = jsonObject.getString("backdrop_path");
         rating = jsonObject.getDouble("vote_average");
+        movieId = jsonObject.getInt("id");
     }
 
     // Empty constructor in order to wrap movie objects in parcel
