@@ -28,7 +28,7 @@ import okhttp3.Headers;
 
 public class DetailActivity extends YouTubeBaseActivity {
     public static final String TAG = "DetailActivity";
-    public static final String YT_API_KEY = "AIzaSyBs9Ulz7YFoPgipNbpgND58ugQ8YStMKGA";
+    public static final String YT_API_KEY = BuildConfig.YT_API_KEY;
     public static final String VIDEOS_URL = "https://api.themoviedb.org/3/movie/%d/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
 
     TextView tvDetailTitle;
@@ -48,6 +48,7 @@ public class DetailActivity extends YouTubeBaseActivity {
 
 
         Movie movie = Parcels.unwrap(getIntent().getParcelableExtra("movie"));
+
         tvDetailTitle.setText(movie.getTitle());
         tvDetailOverview.setText(movie.getOverview());
         ratingBar.setRating((float) movie.getRating());
@@ -65,7 +66,7 @@ public class DetailActivity extends YouTubeBaseActivity {
                     }
                     String youtubeKey = results.getJSONObject(0).getString("key");
                     Log.d(TAG, youtubeKey);
-                    initalizeYoutube(youtubeKey);
+                    initalizeYoutube(youtubeKey, movie);
                 } catch (JSONException e) {
                     Log.e(TAG, "Failed to parse Json." );
                     e.printStackTrace();
@@ -81,19 +82,20 @@ public class DetailActivity extends YouTubeBaseActivity {
 
     }
 
-    private void initalizeYoutube(String youtubeKey) {
+    private void initalizeYoutube(String youtubeKey, Movie movie) {
         playerView.initialize(YT_API_KEY, new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider,
                                                 YouTubePlayer youTubePlayer, boolean b) {
                 // do any work here to cue video, play video, etc.
                 Log.d(TAG, "Success initializing YouTube player");
-                youTubePlayer.cueVideo(youtubeKey);
+                if(movie.getRating() > 5.0){
+                    youTubePlayer.loadVideo(youtubeKey);
+                } else { youTubePlayer.cueVideo(youtubeKey); }
             }
 
             @Override
-            public void onInitializationFailure(YouTubePlayer.Provider provider,
-                                                YouTubeInitializationResult youTubeInitializationResult) {
+            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
                 // log the error
                 Log.d(TAG, "Error initializing YouTube player");
             }

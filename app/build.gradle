@@ -2,8 +2,14 @@ plugins {
     id 'com.android.application'
 }
 
+def apikeyPropertiesFile = rootProject.file("apikey.properties")
+def apikeyProperties = new Properties()
+apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+
 android {
     compileSdkVersion 29
+    dataBinding.enabled = true
+
 
     defaultConfig {
         applicationId "com.example.daniel_h_flicks"
@@ -13,6 +19,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "YT_API_KEY", apikeyProperties['YT_API_KEY'])
     }
 
     buildTypes {
