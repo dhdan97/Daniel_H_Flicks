@@ -52,7 +52,7 @@ In the process of adding more infomation to details to the movie tapped on, in a
 
 ### App Walkthough GIF
 
-<img src="https://i.imgur.com/kGju4h8.gif" width=250><br>
+<img src="https://i.imgur.com/8iNlhFv.gif" width=250><br>
 
 ### Notes
 I had a problem where I would encounter a JsonException trying to obtain the JsonArray "results", turns out I had instead tried to get the JsonArray "Results", which is different from "results"
