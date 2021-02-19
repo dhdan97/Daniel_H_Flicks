@@ -91,7 +91,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             }
 
             int radius = 100;
-            int margin = 10;
             Glide.with(context)
                     .load(imageUrl)
                     .transform(new RoundedCorners(radius))

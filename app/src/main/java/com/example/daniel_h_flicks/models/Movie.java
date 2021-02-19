@@ -15,6 +15,7 @@ public class Movie { // making a class Movie that so we can put the data from th
     String title;
     String overview;
     String backdropPath;
+    String releaseDate;
     double rating;
     int movieId;
 
@@ -39,6 +40,10 @@ public class Movie { // making a class Movie that so we can put the data from th
         return movieId;
     }
 
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
     public String getBackdropPath() {
         return String.format("https://image.tmdb.org/t/p/w780/%s", backdropPath); //for landscape mode
     }
@@ -50,6 +55,7 @@ public class Movie { // making a class Movie that so we can put the data from th
         backdropPath = jsonObject.getString("backdrop_path");
         rating = jsonObject.getDouble("vote_average");
         movieId = jsonObject.getInt("id");
+        releaseDate = jsonObject.getString("release_date");
     }
 
     // Empty constructor in order to wrap movie objects in parcel
